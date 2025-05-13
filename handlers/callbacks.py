@@ -2,7 +2,9 @@ from aiogram import Router, F
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery
 
+from keyboards.contact_keyboard import get_phone_keyboard
 from states.create_user import CreateUser
+from states.login_user import LoginUser
 
 router = Router()
 
@@ -24,6 +26,16 @@ async def handle_about_bot(callback: CallbackQuery):
 
 
 @router.callback_query(F.data == "continue")
-async def handle_continue(callback: CallbackQuery):
-    await callback.message.answer("Продолжаем путь 🚶🏻‍♂️")
+async def handle_continue(callback: CallbackQuery, state: FSMContext):
+    # Объединяем все сообщения в одну строку
+    message_text = (
+        "Продолжаем путь 🚶🏻‍♂️\n"
+        "Для входа отправьте номер телефона через кнопку ниже:"
+    )
+
+    await callback.message.answer(
+        message_text,
+        reply_markup=get_phone_keyboard(),  # Убедись, что эта переменная определена
+    )
+    await state.set_state(LoginUser.phone)
     await callback.answer()
