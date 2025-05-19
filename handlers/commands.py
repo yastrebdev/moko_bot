@@ -8,7 +8,6 @@ router = Router()
 
 @router.message(CommandStart())
 async def start(message: Message):
-    username = message.from_user.username
     name = message.from_user.first_name
 
     welcome_text = (
@@ -18,8 +17,3 @@ async def start(message: Message):
     )
 
     await message.answer(welcome_text, reply_markup=get_start_keyboard())
-
-    # user = await find_user_by_username(username)
-    #
-    # if not user:
-    #     await create_user(username, name)

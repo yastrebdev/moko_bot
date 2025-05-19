@@ -3,9 +3,11 @@ import logging
 
 from handlers import routers
 from bot import dp, bot
+from utils.scheduler import scheduler
 
 
 async def main():
+    scheduler.start()
     for router in routers:
         dp.include_router(router)
     await asyncio.gather(

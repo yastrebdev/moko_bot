@@ -4,6 +4,7 @@ pilgrim = {}
 
 class CreateUser(StatesGroup):
     username = State()
-    age = State()
+    birth_date = State()
     phone = State()
     interests = State()
+    tz = State()

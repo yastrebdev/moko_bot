@@ -9,7 +9,4 @@ def get_start_keyboard():
     builder.row(
         InlineKeyboardButton(text="❓ Узнать обо мне больше", callback_data="about_bot")
     )
-    builder.row(
-        InlineKeyboardButton(text="🚶🏻 Продолжить свой путь", callback_data="continue")
-    )
     return builder.as_markup()
